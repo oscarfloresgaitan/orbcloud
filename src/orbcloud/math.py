@@ -78,7 +78,7 @@ def kepler_to_cartesian(
     y = x_orb * (cos_omega * sin_Omega + sin_omega * cos_Omega * cos_i) - \
         y_orb * (sin_omega * sin_Omega - cos_omega * cos_Omega * cos_i)
         
-    z = x_orb * (sin_omega * sin_i) + \
+    z = - x_orb * (sin_omega * sin_i) - \
         y_orb * (cos_omega * sin_i)
         
     # Stack x, y, z into a single (N_samples, N_points, 3) matrix
