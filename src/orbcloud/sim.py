@@ -24,8 +24,8 @@ class PlanetConfig:
     omega_std_deg: float   # Argument of periastron uncertainty (degrees)
     e_mean: float = None   # Eccentricity (None defaults to Beta prior)
     e_std: float = None    # Eccentricity uncertainty
-    i_deg: float = 0.0     # Fixed inclination (degrees) - defaults to coplanar
-    Omega_deg: float = 0.0 # Fixed longitude of ascending node (degrees) - defaults to coplanar
+    i_deg: float = 0.0     # Fixed inclination (degrees) - defaults to 0
+    Omega_deg: float = 0.0 # Fixed longitude of ascending node (degrees) - defaults to 0
 
 
 def generate_posterior_samples(config: PlanetConfig, num_samples: int = 1000) -> dict:
