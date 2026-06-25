@@ -14,7 +14,7 @@ def solve_kepler(M: np.ndarray, e: np.ndarray, tol: float = 1e-6, max_iter: int 
         max_iter (int): Maximum number of iterations to run the solver (default set to 100)
     
     Returns:
-        E (array): Eccentric Anomaly (units = radians)
+        array: Eccentric Anomaly (units = radians)
     """
     E = M.copy()
     
@@ -52,7 +52,7 @@ def kepler_to_cartesian(
         m_star (float): Mass of the star (unit = M_sun)
     
     Returns:
-        coords (array): An array of x coordinates, y coordinates, and z coordinates of shape (N_samples, N_points, 3). 
+        array: An array of x coordinates, y coordinates, and z coordinates of shape (N_samples, N_points, 3). 
 
     """
     num_samples = len(P)
