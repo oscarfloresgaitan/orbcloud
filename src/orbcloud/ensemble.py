@@ -4,7 +4,7 @@ ensemble.py - Classes representing multi-planet exoplanetary system ensembles.
 import numpy as np
 import matplotlib.pyplot as plt
 from .sim import PlanetConfig, generate_posterior_samples, STELLAR_DATABASE
-from .math import kepler_to_cartesian
+from .kepler_math import kepler_to_cartesian
 
 def _darken_color(hex_color: str, amount: float = 0.25) -> str:
     """Darkens a hex color by a specified amount (0.0 to 1.0) for the border.
