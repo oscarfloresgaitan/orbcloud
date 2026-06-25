@@ -7,5 +7,6 @@ authors:
     given-names: "Sam"
 title: "orbcloud: 3D orbital probability clouds from simulated exoplanet posteriors"
 version: 0.1.1
+doi: 10.5281/zenodo.20876932
 date-released: 2026-06-26
 url: "https://github.com/oscarfloresgaitan/orbcloud"

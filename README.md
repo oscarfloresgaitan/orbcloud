@@ -1,5 +1,7 @@
 # orbcloud
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20876932.svg)](https://doi.org/10.5281/zenodo.20876932)
+
 `orbcloud` is a Python package designed to transform simulated exoplanet parameter posteriors (such as MCMC chains) into physical 3D orbital probability density clouds.
 
 By plotting thousands of low-opacity orbital paths, the overlapping threads naturally highlight the high-probability regions of 3D orbital space, creating a beautiful and physically accurate visualization.
