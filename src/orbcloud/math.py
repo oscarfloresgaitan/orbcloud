@@ -7,9 +7,14 @@ def solve_kepler(M: np.ndarray, e: np.ndarray, tol: float = 1e-6, max_iter: int 
     """
     Vectorized Newton-Raphson solver for Kepler's Equation: M = E - e*sin(E).
     
-    Parameters:
-      M: np.ndarray of shape (N_samples, N_points)
-      e: np.ndarray of shape (N_samples, 1) (broadcastable to M)
+    Args:
+        M (array): Mean anomaly (units = radians, shape = N_samples, N_points)
+        e (array): Eccentricity (shape = N_samples, 1)
+        tol (float): Error tolerance (default set to 1e-6)
+        max_iter (int): Maximum number of iterations to run the solver (default set to 100)
+    
+    Returns:
+        E (array): Eccentric Anomaly (units = radians)
     """
     E = M.copy()
     
@@ -36,11 +41,19 @@ def kepler_to_cartesian(
 ) -> np.ndarray:
     """
     Converts Keplerian elements to 3D Cartesian coordinates (x, y, z)
+
+    Args:
+        P (1D array): Period (unit = days, length = N_samples)
+        e (1D array): Eccentricity (length = N_samples
+        omega (1D array): Argument of periapsis (unit = radians, length = N_samples)
+        i (1D array): Inclination (unit = radians, length = N_samples)
+        Omega (1D array): Longitude of the ascending node (unit = radians, length = N_samples)
+        M_grid (1D array): Mean anomaly grid (unit = radians, length = N_points)
+        m_star (float): Mass of the star (unit = M_sun)
     
-    All inputs P, e, omega, i, Omega are 1D arrays of length N_samples.
-    M_grid is a 1D array of length N_points.
-    
-    Returns an array of shape (N_samples, N_points, 3).
+    Returns:
+        coords (array): An array of x coordinates, y coordinates, and z coordinates of shape (N_samples, N_points, 3). 
+
     """
     num_samples = len(P)
     
