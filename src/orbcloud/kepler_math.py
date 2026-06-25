@@ -1,5 +1,5 @@
 """
-math.py - Vectorized Kepler solvers and coordinate projections using a Mean Anomaly phase grid.
+kepler_math.py - Vectorized Kepler solvers and coordinate projections using a Mean Anomaly phase grid.
 """
 import numpy as np
 
