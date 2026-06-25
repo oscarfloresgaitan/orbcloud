@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Flores Gaitán"
+    given-names: "Oscar A."
+  - family-names: "Hopper"
+    given-names: "Sam"
+title: "orbcloud: 3D orbital probability clouds from simulated exoplanet posteriors"
+version: 0.1.1
+date-released: 2026-06-26
+url: "https://github.com/oscarfloresgaitan/orbcloud"

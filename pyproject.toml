@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "orbcloud"
-version = "0.1.0"
+version = "0.1.1"
 description = "3D orbital probability clouds from simulated exoplanet posteriors"
 readme = "README.md"
 requires-python = ">=3.8"
