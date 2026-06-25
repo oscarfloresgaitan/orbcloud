@@ -55,8 +55,11 @@ class SystemEnsemble:
             star_type (str): The stellar spectral type of the star (default set to None)
         
         '''
-        
-        
+        if star_id is not None and not isinstance(star_id, str):
+            raise TypeError(
+                f"star_id must be a string. Got {type(star_id).__name__}: {star_id!r}. "
+                f"Suggested: 'sun', 'vega', 'barnard'."
+            )
         self.star_id = star_id.lower() if star_id else None
         
         # Determine base properties
@@ -66,8 +69,34 @@ class SystemEnsemble:
             base_props = STELLAR_DATABASE['sun']
             
         name = star_name if star_name is not None else (base_props['name'] if self.star_id in STELLAR_DATABASE else "Custom Star")
+        
+        if star_mass is not None:
+            if not isinstance(star_mass, (int, float, np.integer, np.floating)):
+                raise TypeError(
+                    f"star_mass must be a numeric value. Got {type(star_mass).__name__}: {star_mass!r}. "
+                    f"Suggested: 1.0 (solar mass)."
+                )
+            if star_mass <= 0:
+                raise ValueError(
+                    f"star_mass must be positive and greater than 0. Got {star_mass}. "
+                    f"Suggested typical values: 1.0 (for solar mass), 0.14 (M dwarf), or 2.1 (A star)."
+                )
         mass = star_mass if star_mass is not None else base_props['mass']
-        stype = star_type.upper() if star_type is not None else base_props['type']
+
+        if star_type is not None:
+            if not isinstance(star_type, str):
+                raise TypeError(
+                    f"star_type must be a string representing a spectral class. Got {type(star_type).__name__}: {star_type!r}. "
+                    f"Suggested spectral classes: 'O', 'B', 'A', 'F', 'G', 'K', or 'M'."
+                )
+            stype = star_type.upper()
+            if stype not in SPECTRAL_COLORS:
+                raise ValueError(
+                    f"Invalid star_type {star_type!r}. Must be one of the spectral classes: {list(SPECTRAL_COLORS.keys())}. "
+                    f"Suggested: 'G' (like the Sun), 'M' (like Barnard's Star), or 'A' (like Vega)."
+                )
+        else:
+            stype = base_props['type']
         
         # Determine color and size
         if star_type is not None:
@@ -99,6 +128,33 @@ class SystemEnsemble:
             None
 
         """
+        # Validate inputs
+        if not isinstance(config, PlanetConfig):
+            raise TypeError(
+                f"config must be an instance of PlanetConfig. Got {type(config).__name__}: {config!r}. "
+                f"Please create a PlanetConfig instance first."
+            )
+        if not isinstance(num_samples, (int, np.integer)):
+            raise TypeError(
+                f"num_samples must be an integer. Got {type(num_samples).__name__}: {num_samples!r}. "
+                f"Suggested: 500 or 1000."
+            )
+        if num_samples <= 0:
+            raise ValueError(
+                f"num_samples must be positive and greater than 0. Got {num_samples}. "
+                f"Suggested: 1000."
+            )
+        if not isinstance(num_points, (int, np.integer)):
+            raise TypeError(
+                f"num_points must be an integer. Got {type(num_points).__name__}: {num_points!r}. "
+                f"Suggested: 100 or 200."
+            )
+        if num_points <= 0:
+            raise ValueError(
+                f"num_points must be positive and greater than 0. Got {num_points}. "
+                f"Suggested: 200."
+            )
+
         # 1. Generate posterior samples
         samples = generate_posterior_samples(config, num_samples)
         
@@ -171,7 +227,53 @@ class SystemEnsemble:
             Axes object: The 2D and/or 3D plot of the orbits for the planet(s) in the system. 
 
         """
+        if not isinstance(dimension, str):
+            raise TypeError(f"dimension must be a string. Got {type(dimension).__name__}: {dimension!r}")
         dimension = dimension.lower()
+        if dimension not in ['2d', '3d', 'both']:
+            raise ValueError(
+                f"dimension must be '2d', '3d', or 'both'. Got {dimension!r}. "
+                f"Suggested: 'both' for 2D & 3D side-by-side, '2d' for top view, or '3d' for lateral view."
+            )
+
+        if planets_to_show is not None:
+            if not isinstance(planets_to_show, list) or not all(isinstance(p, str) for p in planets_to_show):
+                raise TypeError(
+                    f"planets_to_show must be a list of planet name strings. Got {type(planets_to_show).__name__}: {planets_to_show!r}. "
+                    f"Suggested: ['Planet b'] or ['Planet b', 'Planet c']."
+                )
+            for p in planets_to_show:
+                if p not in self.planets:
+                    raise ValueError(
+                        f"Planet {p!r} is not in the system ensemble. "
+                        f"Available planets: {list(self.planets.keys())}. "
+                        f"Please add the planet first using add_planet() or check the name spelling."
+                    )
+
+        if alpha is not None:
+            if not isinstance(alpha, (int, float, np.integer, np.floating)):
+                raise TypeError(f"alpha must be a number. Got {type(alpha).__name__}: {alpha!r}")
+            if not (0.0 <= alpha <= 1.0):
+                raise ValueError(f"alpha must be in the range [0.0, 1.0]. Got {alpha}")
+        
+        if alpha_2d is not None:
+            if not isinstance(alpha_2d, (int, float, np.integer, np.floating)):
+                raise TypeError(f"alpha_2d must be a number. Got {type(alpha_2d).__name__}: {alpha_2d!r}")
+            if not (0.0 <= alpha_2d <= 1.0):
+                raise ValueError(f"alpha_2d must be in the range [0.0, 1.0]. Got {alpha_2d}")
+
+        if alpha_3d is not None:
+            if not isinstance(alpha_3d, (int, float, np.integer, np.floating)):
+                raise TypeError(f"alpha_3d must be a number. Got {type(alpha_3d).__name__}: {alpha_3d!r}")
+            if not (0.0 <= alpha_3d <= 1.0):
+                raise ValueError(f"alpha_3d must be in the range [0.0, 1.0]. Got {alpha_3d}")
+
+        if limit_padding is not None:
+            if not isinstance(limit_padding, (int, float, np.integer, np.floating)):
+                raise TypeError(f"limit_padding must be a number. Got {type(limit_padding).__name__}: {limit_padding!r}")
+            if limit_padding <= 0:
+                raise ValueError(f"limit_padding must be positive and greater than 0. Got {limit_padding}")
+
         
         # 1. Handle side-by-side double plot
         if dimension == 'both':

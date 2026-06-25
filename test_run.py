@@ -11,7 +11,7 @@ def run():
     print("Initializing exoplanetary system ensemble...")
     system = SystemEnsemble(star_name='Custom Star', star_mass=1.6, star_type='M')
     
-    # Planet b config (~0.4 AU, flat in X-Y plane, K and t0 dropped for simplicity)
+    # Planet b config
     planet_b = PlanetConfig(
         name='Planet b',
         P_mean=90.0, P_std=8.0,
@@ -20,7 +20,7 @@ def run():
         i_deg=0.0, Omega_deg=0.0
     )
     
-    # Planet c config (~0.8 AU, flat in X-Y plane, K and t0 dropped for simplicity)
+    # Planet c config
     planet_c = PlanetConfig(
         name='Planet c',
         P_mean=260.0, P_std=14.0,
@@ -35,12 +35,12 @@ def run():
     # Render both 2D and 3D subplots side-by-side using the library's defaults
     print("Rendering exoplanetary system...")
     system.plot_system(show_reference_plane=True)
-    
-    plt.show()
-    
+        
     # Save the output image locally
-    output_path = 'my_system_plot2.png'
+    output_path = 'my_system_plot.png'
     plt.savefig(output_path, dpi=150, facecolor='white', bbox_inches='tight')
+
+    plt.show()
 
 if __name__ == '__main__':
     run()

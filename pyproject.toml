@@ -1,11 +1,25 @@
 [build-system]
-requires = ["setuptools >= 61.0"]
+requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "orbcloud"
-version = "0.0.1"
-
+version = "0.1.1"
+description = "3D orbital probability clouds from simulated exoplanet posteriors"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Oscar Flores Gaitán"},
+    {name = "Sam Hopper"}
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Astronomy",
+]
 dependencies = [
  "numpy",
  "matplotlib"
