@@ -7,7 +7,15 @@ from .sim import PlanetConfig, generate_posterior_samples, STELLAR_DATABASE
 from .math import kepler_to_cartesian
 
 def _darken_color(hex_color: str, amount: float = 0.25) -> str:
-    """Darkens a hex color by a specified amount (0.0 to 1.0) for the border."""
+    """Darkens a hex color by a specified amount (0.0 to 1.0) for the border.
+    
+    Args:
+        hex_color (str): The # + 6 letter/number hexcode of the color of the orbit (e.g #F54927)
+        amount (float): The amount from 0.0 to 1.0 that the color will be darkened (default set to 0.25)
+
+    Returns:
+        The hexcode (str) of the darkened color in the format of #xxxxxx
+    """
     hex_color = hex_color.lstrip('#')
     r, g, b = int(hex_color[0:2], 16), int(hex_color[2:4], 16), int(hex_color[4:6], 16)
     r = int(r * (1.0 - amount))
@@ -39,6 +47,16 @@ SPECTRAL_SIZES = {
 
 class SystemEnsemble:
     def __init__(self, star_id: str = 'sun', star_name: str = None, star_mass: float = None, star_type: str = None):
+        '''
+        Args:
+            star_id (str): The id of the star to access the stellar properties in STELLAR_DATABASE (default set to sun)
+            star_name (str): Name of the star (default set to None)
+            star_mass (float): Mass of the star (default set to None)
+            star_type (str): The stellar spectral type of the star (default set to None)
+        
+        '''
+        
+        
         self.star_id = star_id.lower() if star_id else None
         
         # Determine base properties
@@ -70,7 +88,17 @@ class SystemEnsemble:
         self.planets = {} 
         
     def add_planet(self, config: PlanetConfig, num_samples: int = 1000, num_points: int = 200):
-        """Simulates parameter posterior distributions and pre-computes 3D paths for a planet."""
+        """Simulates parameter posterior distributions and pre-computes 3D paths for a planet. This function stores the computed orbital coordinates.
+        
+        Args:
+            config (PlanetConfig object): The dataclass storing the planet's orbital parameters
+            num_samples (int): The number of posterior samples to generate (default set to 1000)
+            num_points (int): The number of points to generate (default set to 200)
+
+        Returns:
+            None
+
+        """
         # 1. Generate posterior samples
         samples = generate_posterior_samples(config, num_samples)
         
@@ -125,6 +153,23 @@ class SystemEnsemble:
     ):
         """
         Plots the exoplanet system in 2D, 3D, or both side-by-side.
+
+        Args:
+            ax (Axes object): Creates a Matplotlib Axes object for plotting (default set to None)
+            dimension (str): Generates a 2D and/or 3D plot of the orbits (default set to 'both')
+            planets_to_show (list[str]): Identifies which planets in the system should be shown on the plot (default set to None)
+            alpha (float): The opacity of the plotted data (deafult set to None)
+            alpha_2d (float): The opacity of the plotted data for the 2D plot (default set to 0.02)
+            alpha_3d (float): The opacity of the plotted data for the 3D plot (default set to 0.01)
+            colors (list[str]): The colors to be used for the orbits (default set to None)
+            elev (float): The elevation of the 3D plot for display (default set to 20.0)
+            azim (float): The azimuth of the 3D plot for display (default set to -60.0)
+            limit_padding (float): Sets the plot axes limits based on the maximum coordinate values (default set to 1.02)
+            show_reference_plane (bool): Shows the reference (0º) plane of the orbits on the 3D plot (default set to false) 
+
+        Returns:
+            ax (Axes object): The 2D and/or 3D plot of the orbits for the planet(s) in the system. 
+
         """
         dimension = dimension.lower()
         
