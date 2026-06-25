@@ -31,11 +31,7 @@ where = ["src"]
 [tool.setuptools.package-data]
 orbcloud = ["py.typed"]
 
-[tool.mypy]
-warn_return_any = true
-warn_unused_configs = true
-ignore_missing_imports = true
-sqlite_cache = false
+
 
 [tool.pytest.ini_options]
 minversion = "6.0"
