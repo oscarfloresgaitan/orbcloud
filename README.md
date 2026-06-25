@@ -79,7 +79,7 @@ plt.savefig('system_both_views.png', dpi=150, facecolor='white', bbox_inches='ti
 plt.show()
 ```
 
-![Exoplanet Orbital Probability Clouds Plot](/Users/cocaflores22/.gemini/antigravity-ide/brain/db903965-f2e8-41ea-93d3-c3c3c1f98402/tutorial_plot_1.png)
+![Exoplanet Orbital Probability Clouds Plot](assets/tutorial_plot_1.png)
 
 ### Step 4: Filtering Planet Visibility or Projection
 If you want to view a single projection (e.g. 2D top-down view only) or isolate a specific planet, pass the `dimension` and `planets_to_show` filters:
@@ -91,7 +91,7 @@ plt.savefig('planet_b_2d_only.png', dpi=150, facecolor='white', bbox_inches='tig
 plt.show()
 ```
 
-![Planet b 2D Top View](/Users/cocaflores22/.gemini/antigravity-ide/brain/db903965-f2e8-41ea-93d3-c3c3c1f98402/tutorial_plot_2.png)
+![Planet b 2D Top View](assets/tutorial_plot_2.png)
 
 ### Step 5: Defining a Custom Star
 You can configure the central star's size, glow, and color dynamically using real-world reference stars (e.g. "Vega", "Barnard's Star", or "Theta1 Orionis C"):
@@ -109,7 +109,7 @@ plt.savefig('custom_star_both_views.png', dpi=150, facecolor='white', bbox_inche
 plt.show()
 ```
 
-![Custom Star System Plot](/Users/cocaflores22/.gemini/antigravity-ide/brain/db903965-f2e8-41ea-93d3-c3c3c1f98402/tutorial_plot_3.png)
+![Custom Star System Plot](assets/tutorial_plot_3.png)
 
 ---
 
