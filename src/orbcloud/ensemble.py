@@ -1,6 +1,8 @@
+from __future__ import annotations
 """
 ensemble.py - Classes representing multi-planet exoplanetary system ensembles.
 """
+from typing import Any, Optional
 import numpy as np
 import matplotlib.pyplot as plt
 from .sim import PlanetConfig, generate_posterior_samples, STELLAR_DATABASE
@@ -46,7 +48,13 @@ SPECTRAL_SIZES = {
 
 
 class SystemEnsemble:
-    def __init__(self, star_id: str = 'sun', star_name: str = None, star_mass: float = None, star_type: str = None):
+    def __init__(
+        self,
+        star_id: str = 'sun',
+        star_name: Optional[str] = None,
+        star_mass: Optional[float] = None,
+        star_type: Optional[str] = None
+    ):
         '''
         Args:
             star_id (str): The id of the star to access the stellar properties in STELLAR_DATABASE (default set to sun)
@@ -63,6 +71,7 @@ class SystemEnsemble:
         self.star_id = star_id.lower() if star_id else None
         
         # Determine base properties
+        base_props: dict[str, Any]
         if self.star_id in STELLAR_DATABASE:
             base_props = STELLAR_DATABASE[self.star_id]
         else:
@@ -106,7 +115,7 @@ class SystemEnsemble:
             color = base_props['color']
             size = base_props['size']
             
-        self.star_props = {
+        self.star_props: dict[str, Any] = {
             'name': name,
             'type': stype,
             'mass': mass,
@@ -114,7 +123,7 @@ class SystemEnsemble:
             'size': size
         }
         self.m_star = self.star_props['mass']
-        self.planets = {} 
+        self.planets: dict[str, dict[str, np.ndarray]] = {} 
         
     def add_planet(self, config: PlanetConfig, num_samples: int = 1000, num_points: int = 200):
         """Simulates parameter posterior distributions and pre-computes 3D paths for a planet. This function stores the computed orbital coordinates.
@@ -195,13 +204,13 @@ class SystemEnsemble:
         
     def plot_system(
         self,
-        ax=None,
+        ax: Any = None,
         dimension: str = 'both',
-        planets_to_show: list[str] = None,
-        alpha: float = None,
+        planets_to_show: Optional[list[str]] = None,
+        alpha: Optional[float] = None,
         alpha_2d: float = 0.02,
         alpha_3d: float = 0.01,
-        colors: list[str] = None,
+        colors: Optional[list[str]] = None,
         elev: float = 20.0,
         azim: float = -60.0,
         limit_padding: float = 1.02,

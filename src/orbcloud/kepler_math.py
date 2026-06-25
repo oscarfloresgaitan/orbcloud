@@ -1,6 +1,7 @@
 """
 kepler_math.py - Vectorized Kepler solvers and coordinate projections using a Mean Anomaly phase grid.
 """
+from typing import cast
 import numpy as np
 
 def solve_kepler(M: np.ndarray, e: np.ndarray, tol: float = 1e-6, max_iter: int = 100) -> np.ndarray:
@@ -137,4 +138,4 @@ def kepler_to_cartesian(
     # Stack x, y, z into a single (N_samples, N_points, 3) matrix
     coords = np.stack([x, y, z], axis=-1)
     
-    return coords
+    return cast(np.ndarray, coords)

@@ -2,10 +2,11 @@
 sim.py - Simulated exoplanet posterior parameter generator without redundant RV amplitude/epoch parameters.
 """
 from dataclasses import dataclass
+from typing import Any, Optional
 import numpy as np
 
 # Real-world reference stars mapping spectral type, physical mass (M_sun), and visual properties
-STELLAR_DATABASE = {
+STELLAR_DATABASE: dict[str, dict[str, Any]] = {
     'theta1': {'name': 'Theta1 Orionis C', 'type': 'O', 'mass': 33.0,  'color': '#9bb0ff', 'size': 150},
     'achernar':         {'name': 'Achernar',          'type': 'B', 'mass': 6.7,   'color': '#aabfff', 'size': 120},
     'vega':             {'name': 'Vega',              'type': 'A', 'mass': 2.1,   'color': '#cad7ff', 'size': 90},
@@ -22,8 +23,8 @@ class PlanetConfig:
     P_std: float           # Period uncertainty (days)
     omega_mean_deg: float  # Argument of periastron (degrees)
     omega_std_deg: float   # Argument of periastron uncertainty (degrees)
-    e_mean: float = None   # Eccentricity (None defaults to Beta prior)
-    e_std: float = None    # Eccentricity uncertainty
+    e_mean: Optional[float] = None   # Eccentricity (None defaults to Beta prior)
+    e_std: Optional[float] = None    # Eccentricity uncertainty
     i_deg: float = 0.0     # Fixed inclination (degrees) - defaults to 0
     Omega_deg: float = 0.0 # Fixed longitude of ascending node (degrees) - defaults to 0
 

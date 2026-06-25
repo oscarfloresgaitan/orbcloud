@@ -31,3 +31,8 @@ htmlcov/
 .vscode/
 .idea/
 .DS_Store
+
+# Sphinx documentation builds
+docs/_build/
+_build/
+
