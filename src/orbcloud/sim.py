@@ -27,6 +27,67 @@ class PlanetConfig:
     i_deg: float = 0.0     # Fixed inclination (degrees) - defaults to 0
     Omega_deg: float = 0.0 # Fixed longitude of ascending node (degrees) - defaults to 0
 
+    def __post_init__(self):
+        if not isinstance(self.name, str) or not self.name.strip():
+            raise TypeError(
+                f"Planet name must be a non-empty string. Got {type(self.name).__name__}: {self.name!r}. "
+                f"Suggested: 'Planet b' or 'Kepler-186f'."
+            )
+            
+        def _check_numeric(val, field_name):
+            if not isinstance(val, (int, float, np.integer, np.floating)):
+                raise TypeError(
+                    f"{field_name} must be a number (float or int). Got {type(val).__name__}: {val!r}. "
+                    f"Please check that you didn't pass a string, list, or dictionary."
+                )
+
+        _check_numeric(self.P_mean, "P_mean")
+        _check_numeric(self.P_std, "P_std")
+        _check_numeric(self.omega_mean_deg, "omega_mean_deg")
+        _check_numeric(self.omega_std_deg, "omega_std_deg")
+        _check_numeric(self.i_deg, "i_deg")
+        _check_numeric(self.Omega_deg, "Omega_deg")
+
+        if self.P_mean <= 0:
+            raise ValueError(
+                f"P_mean (period mean) must be positive and greater than 0. Got {self.P_mean}. "
+                f"Suggested: 90.0 or 365.25."
+            )
+        if self.P_std < 0:
+            raise ValueError(
+                f"P_std (period uncertainty) must be non-negative. Got {self.P_std}. "
+                f"Suggested: 5.0 or 0.0."
+            )
+        if self.omega_std_deg < 0:
+            raise ValueError(
+                f"omega_std_deg (omega uncertainty) must be non-negative. Got {self.omega_std_deg}. "
+                f"Suggested: 10.0 or 0.0."
+            )
+
+        if (self.e_mean is None) != (self.e_std is None):
+            raise ValueError(
+                f"Both e_mean and e_std must be specified (or both left as None to use the default Beta prior). "
+                f"Got e_mean={self.e_mean}, e_std={self.e_std}. "
+                f"Please specify both (e.g., e_mean=0.15, e_std=0.05) or omit both."
+            )
+
+        if self.e_mean is not None:
+            _check_numeric(self.e_mean, "e_mean")
+            if not (0.0 <= self.e_mean < 1.0):
+                raise ValueError(
+                    f"e_mean (eccentricity) must be in the range [0, 1) for elliptic orbits. Got {self.e_mean}. "
+                    f"Suggested typical values: 0.0 (circular), 0.15, or 0.3."
+                )
+
+        if self.e_std is not None:
+            _check_numeric(self.e_std, "e_std")
+            if self.e_std < 0:
+                raise ValueError(
+                    f"e_std (eccentricity uncertainty) must be non-negative. Got {self.e_std}. "
+                    f"Suggested: 0.05 or 0.0."
+                )
+
+
 
 def generate_posterior_samples(config: PlanetConfig, num_samples: int = 1000) -> dict:
     """
