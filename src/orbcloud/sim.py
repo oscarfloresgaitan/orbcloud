@@ -31,8 +31,18 @@ class PlanetConfig:
 def generate_posterior_samples(config: PlanetConfig, num_samples: int = 1000) -> dict:
     """
     Simulates posterior distributions for an exoplanet's geometric parameters.
-    
-    Returns a dictionary of numpy arrays (each of length num_samples).
+
+    Args:
+        config (PlanetConfig object): The dataclass storing the planet's orbital parameters
+        num_samples (int): The number of posterior samples to generate to simulate MCMC data (default set to 1000)
+
+    Returns:
+        dict: a dictionary of the posteriors (arrays of length = num_samples) to simulate MCMC data
+            * 'P' (array): Period (days)
+            * 'e' (array): Eccentricity
+            * 'omega' (array): Argument of periapsis (radians)
+            * 'i' (array): Inclination (radians)
+            * 'Omega' (array): Longitude of the ascending node (radians)
     """
     rng = np.random.default_rng()
     
