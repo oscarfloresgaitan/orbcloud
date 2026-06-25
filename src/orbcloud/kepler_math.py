@@ -7,9 +7,14 @@ def solve_kepler(M: np.ndarray, e: np.ndarray, tol: float = 1e-6, max_iter: int 
     """
     Vectorized Newton-Raphson solver for Kepler's Equation: M = E - e*sin(E).
     
-    Parameters:
-      M: np.ndarray of shape (N_samples, N_points)
-      e: np.ndarray of shape (N_samples, 1) (broadcastable to M)
+    Args:
+        M (array): Mean anomaly (units = radians, shape = N_samples, N_points)
+        e (array): Eccentricity (shape = N_samples, 1)
+        tol (float): Error tolerance (default set to 1e-6)
+        max_iter (int): Maximum number of iterations to run the solver (default set to 100)
+    
+    Returns:
+        array: Eccentric Anomaly (units = radians)
     """
     e_arr = np.asarray(e)
     if np.any(e_arr < 0.0) or np.any(e_arr >= 1.0):
@@ -45,10 +50,9 @@ def kepler_to_cartesian(
     """
     Converts Keplerian elements to 3D Cartesian coordinates (x, y, z)
     
-    All inputs P, e, omega, i, Omega are 1D arrays of length N_samples.
-    M_grid is a 1D array of length N_points.
-    
-    Returns an array of shape (N_samples, N_points, 3).
+    Returns:
+        array: An array of x coordinates, y coordinates, and z coordinates of shape (N_samples, N_points, 3). 
+
     """
     # 1. Type validation for stellar mass
     if not isinstance(m_star, (int, float, np.integer, np.floating)):

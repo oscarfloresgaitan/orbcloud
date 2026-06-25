@@ -3,8 +3,8 @@ ensemble.py - Classes representing multi-planet exoplanetary system ensembles.
 """
 import numpy as np
 import matplotlib.pyplot as plt
-from .sim import PlanetConfig, generate_posterior_samples, STELLAR_DATABASE
-from .kepler_math import kepler_to_cartesian
+from orbcloud.sim import PlanetConfig, generate_posterior_samples, STELLAR_DATABASE
+from orbcloud.kepler_math import kepler_to_cartesian
 
 def _darken_color(hex_color: str, amount: float = 0.25) -> str:
     """Darkens a hex color by a specified amount (0.0 to 1.0) for the border.
@@ -14,7 +14,7 @@ def _darken_color(hex_color: str, amount: float = 0.25) -> str:
         amount (float): The amount from 0.0 to 1.0 that the color will be darkened (default set to 0.25)
 
     Returns:
-        The hexcode (str) of the darkened color in the format of #xxxxxx
+        str: The hexcode of the darkened color in the format of #xxxxxx
     """
     hex_color = hex_color.lstrip('#')
     r, g, b = int(hex_color[0:2], 16), int(hex_color[2:4], 16), int(hex_color[4:6], 16)
@@ -224,7 +224,7 @@ class SystemEnsemble:
             show_reference_plane (bool): Shows the reference (0º) plane of the orbits on the 3D plot (default set to false) 
 
         Returns:
-            ax (Axes object): The 2D and/or 3D plot of the orbits for the planet(s) in the system. 
+            Axes object: The 2D and/or 3D plot of the orbits for the planet(s) in the system. 
 
         """
         if not isinstance(dimension, str):
