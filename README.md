@@ -6,22 +6,13 @@
 
 `orbcloud` is a Python package designed to transform simulated exoplanet parameter posteriors (such as MCMC chains) into physical 3D orbital probability density clouds.
 
-By plotting thousands of low-opacity orbital paths, the overlapping threads naturally highlight the high-probability regions of 3D orbital space, creating a beautiful and physically accurate visualization.
+By plotting thousands of orbits, the overlapping threads naturally highlight the high-probability regions of 3D orbital space, creating a beautiful and physically accurate visualization.
 
 > [!TIP]
 > In addition to visualization, `orbcloud` can be useful to rule out possible dynamical instability in the system. Visually mapping the orbital probability clouds allows researchers to quickly identify overlapping orbital regions. This helps save significant time and computational resources by avoiding expensive N-body simulations if a visual inspection already reveals that the system is most likely going to be unstable anyway.
 
 ---
 
-## Features
-
-- **Vectorized Kepler Solver**: Vectorized Newton-Raphson solver to compute eccentric and true anomalies over custom phase grids.
-- **Physical Star Customization**: Built-in star properties database (e.g. Vega, Barnard's Star) that automatically adjusts the size and glowing spectral color of the central star.
-- **Top (2D) & Lateral (3D) Views**: Easily render orbits in 2D, 3D, or side-by-side.
-- **Transparent Alpha-Clouds**: Line-by-line low opacity (`alpha=0.02`) plots that naturally map the probability clouds.
-- **Robust Parameter Validation**: Informative alert messages and correction suggestions to prevent unphysical values (e.g. eccentricity $\ge 1.0$) or solver failures.
-
----
 
 ## Installation
 
@@ -74,7 +65,7 @@ system.add_planet(planet_c, num_samples=1000)
 ```
 
 ### Step 3: Visualize the Full Probability Cloud
-By default, `plot_system()` will generate both 2D and 3D subplots side-by-side using the optimized parameter defaults (`alpha_2d=0.02` and `alpha_3d=0.01`).
+By default, `plot_system()` will generate both 2D and 3D subplots side-by-side.
 
 ```python
 # Render both 2D (top-down) and 3D (oblique lateral) views
@@ -98,7 +89,7 @@ plt.show()
 ![Planet b 2D Top View](assets/tutorial_plot_2.png)
 
 ### Step 5: Defining a Custom Star
-You can configure the central star's size, glow, and color dynamically using real-world reference stars (e.g. "Vega", "Barnard's Star", or "Theta1 Orionis C"):
+You can configure the central star's size, glow, and color dynamically using real-world reference stars (e.g. "Vega" or "Barnard's Star", or "Theta1 Orionis C"):
 
 ```python
 # Initialize a system centered around a custom massive O-type star (Theta1 Orionis C)
@@ -115,14 +106,6 @@ plt.show()
 
 ![Custom Star System Plot](assets/tutorial_plot_3.png)
 
----
-
-## Development & Testing
-
-Run unit tests via `pytest`:
-```bash
-python3 -m pytest -v
-```
 
 ---
 
