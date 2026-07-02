@@ -7,13 +7,13 @@ import numpy as np
 
 # Real-world reference stars mapping spectral type, physical mass (M_sun), and visual properties
 STELLAR_DATABASE: dict[str, dict[str, Any]] = {
-    'theta1': {'name': 'Theta1 Orionis C', 'type': 'O', 'mass': 33.0,  'color': '#9bb0ff', 'size': 150},
-    'achernar':         {'name': 'Achernar',          'type': 'B', 'mass': 6.7,   'color': '#aabfff', 'size': 120},
-    'vega':             {'name': 'Vega',              'type': 'A', 'mass': 2.1,   'color': '#cad7ff', 'size': 90},
-    'upsilon':{'name': 'Upsilon Andromedae','type': 'F', 'mass': 1.3,   'color': '#f8f7ff', 'size': 80},
-    'sun':              {'name': 'The Sun',           'type': 'G', 'mass': 1.0,   'color': '#FFCC00', 'size': 70},
+    'theta1': {'name': 'Theta1 Orionis C', 'type': 'O', 'mass': 33.00,  'color': '#9bb0ff', 'size': 150},
+    'achernar':         {'name': 'Achernar',          'type': 'B', 'mass': 6.00,   'color': '#aabfff', 'size': 120},
+    'vega':             {'name': 'Vega',              'type': 'A', 'mass': 2.15,   'color': '#cad7ff', 'size': 90},
+    'upsilon':{'name': 'Upsilon Andromedae','type': 'F', 'mass': 1.23,   'color': '#f8f7ff', 'size': 80},
+    'sun':              {'name': 'The Sun',           'type': 'G', 'mass': 1.00,   'color': '#FFCC00', 'size': 70},
     'epsilon':  {'name': 'Epsilon Eridani',   'type': 'K', 'mass': 0.82,  'color': '#ffd2a1', 'size': 60},
-    'barnard':    {'name': "Barnard's Star",    'type': 'M', 'mass': 0.144, 'color': '#ff9e9e', 'size': 45}
+    'barnard':    {'name': "Barnard's Star",    'type': 'M', 'mass': 0.16, 'color': '#ff9e9e', 'size': 45}
 }
 
 @dataclass
