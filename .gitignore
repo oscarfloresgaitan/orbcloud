@@ -36,3 +36,11 @@ htmlcov/
 docs/_build/
 _build/
 
+# Local generated output files
+my_system_plot.png
+*.png
+!assets/*.png
+
+# Large MCMC trace files / NetCDF datasets
+*.nc
+
