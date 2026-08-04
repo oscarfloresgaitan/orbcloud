@@ -1,0 +1,11 @@
+.. _ensemble:
+
+Orbit Ensemble
+=====================
+
+Add planets and plot orbits. 
+
+.. automodule:: ensemble
+   :members:
+   :undoc-members:
+   :show-inheritance:

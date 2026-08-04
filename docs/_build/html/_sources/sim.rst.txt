@@ -1,0 +1,11 @@
+.. _sim:
+
+MCMC Simulated Data
+=====================
+
+Functions to generate MCMC Simulated Data
+
+.. automodule:: sim
+   :members:
+   :undoc-members:
+   :show-inheritance:

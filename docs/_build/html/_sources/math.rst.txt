@@ -1,0 +1,9 @@
+.. _kepler_math:
+
+Mathematical functions for solving orbits
+=====================
+
+Mathematical functions to solve the keplerian orbits
+
+.. automodule:: kepler_math
+   :members:
