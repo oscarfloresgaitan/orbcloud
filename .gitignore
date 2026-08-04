@@ -31,3 +31,16 @@ htmlcov/
 .vscode/
 .idea/
 .DS_Store
+
+# Sphinx documentation builds
+docs/_build/
+_build/
+
+# Local generated output files
+my_system_plot.png
+*.png
+!assets/*.png
+
+# Large MCMC trace files / NetCDF datasets
+*.nc
+

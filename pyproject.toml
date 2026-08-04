@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "orbcloud"
-version = "0.1.1"
+version = "0.1.2"
 description = "3D orbital probability clouds from simulated exoplanet posteriors"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -21,9 +21,28 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Astronomy",
 ]
 dependencies = [
- "numpy",
- "matplotlib"
+    "numpy",
+    "matplotlib"
 ]
 
-[tool.setuptools]
-package-dir = {"" = "src"}
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+orbcloud = ["py.typed"]
+
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
+
+[tool.coverage.run]
+source = ["src/orbcloud"]
+
+[tool.coverage.report]
+show_missing = true
+

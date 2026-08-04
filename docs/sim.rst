@@ -1,11 +1,11 @@
 .. _sim:
 
 Simulate MCMC Orbital Posteriors
-=====================
+================================
 
-This module is used to simulate hypothetical MCMC orbital posteriors for the tutorial notebook. 
+This module is used to simulate hypothetical MCMC orbital posteriors for the tutorial notebook.
 
-.. automodule:: sim
+.. automodule:: orbcloud.sim
    :members:
    :undoc-members:
    :show-inheritance:

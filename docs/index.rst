@@ -3,21 +3,22 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-orbcloud documentation
-======================
+Welcome to orbcloud's documentation!
+====================================
 
-orbcloud
-
+`orbcloud` is a Python package designed to transform simulated exoplanet parameter posteriors (such as MCMC chains) into physical 3D orbital probability density clouds.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   sim.rst
-   kepler_math.rst
-   ensemble.rst
+   sim
+   kepler_math
+   ensemble
 
-  
+Indices and tables
+==================
+
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
