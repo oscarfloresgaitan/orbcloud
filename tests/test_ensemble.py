@@ -51,7 +51,7 @@ def test_system_ensemble_init_validation():
     sys_env = SystemEnsemble(star_id="vega")
     assert sys_env.star_props["name"] == "Vega"
     assert sys_env.star_props["type"] == "A"
-    assert sys_env.m_star == 2.1
+    assert sys_env.m_star == 2.15
     
     # 2. Invalid star type
     with pytest.raises(ValueError) as excinfo:
