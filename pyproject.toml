@@ -28,10 +28,6 @@ dependencies = [
 [tool.setuptools.packages.find]
 where = ["src"]
 
-[tool.setuptools.package-data]
-orbcloud = ["py.typed"]
-
-
 
 [tool.pytest.ini_options]
 minversion = "6.0"
