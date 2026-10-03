@@ -12,8 +12,8 @@ sys.path.insert(0, os.path.abspath('../src'))
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'orbcloud'
-copyright = '2026, Oscar Flores Gaitán and Sam Hopper'
-author = 'Oscar Flores Gaitán and Sam Hopper'
+copyright = '2026, Oscar A. Flores Gaitán'
+author = 'Oscar A. Flores Gaitán'
 root_doc = 'index'
 
 # The full version, including alpha/beta/rc tags
