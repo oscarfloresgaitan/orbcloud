@@ -52,3 +52,7 @@ my_system_plot.png
 # Large MCMC trace files / NetCDF datasets
 *.nc
 
+# Private roadmaps and planning documents
+ROADMAP.md
+*roadmap*.md
+
